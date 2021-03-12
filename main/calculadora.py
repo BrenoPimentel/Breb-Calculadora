@@ -12,8 +12,15 @@ print('')
 def matt():
     op = ' '
     while op != 'b' and op != 'a':
-        op = str(input('Operações Básica ou Avançadas? [B/A] ')).lower().strip()
-    num1 = float(input('Número: '))
+        op = str(input('Escolha entre operações Básica e Avançadas. [B/A] ')).lower().strip()
+    num1 = input('Número: ')
+    #  Se o usuário não digitar um número
+    while not num1.isdecimal():
+        num1 = input('Digite o número novamente: ')
+    #  Se o usuário digitar um número
+    if num1.isdecimal():
+        #  Transforma a string num1 em um número float
+        num1 = float(num1)
     add = num1
     if op == 'b':
         while True:
@@ -26,6 +33,10 @@ def matt():
             print('[ %  ] Resto da divisão por')
             print('[ stop ] Parar')
             esc = input('Digite a operação: ').lower().strip()
+            #  Se o usuário não digitar nada.
+            while esc == '' or esc == ' ':
+                esc = input('OPÇÃO INVÁLIDA. Digite a operação: ').lower().strip()
+            #  Se o usuário digitar uma opção não catalogada
             while esc not in '+-xX///**stop%':
                 print('OPÇÃO INVÁLIDA')
                 print('[ +  ] Somar ')
@@ -39,7 +50,14 @@ def matt():
                 esc = input('Aqui: ').strip().lower()
             if esc == 'parar' or esc == 'stop':
                 break
-            num2 = float(input('Número: '))
+            num2 = input('Número: ')
+            #  If user don't input number
+            while not num2.isdecimal():
+                num2 = input('Digite o número novamente: ')
+            #  If user's input is a number then
+            if num2.isdecimal():
+                #  transform the string into a float number
+                num2 = float(num2)
             if esc == 'soma' or esc == '+':
                 add += num2
             elif esc == '-':
@@ -66,7 +84,14 @@ def matt():
             # outro numero
             repet += 1
             if repet > 1:
-                numrep = int(input('Digite um número: '))
+                numrep = input('Digite um número: ')
+                #  If user don't input a number
+                while not numrep.isdecimal():
+                    numrep = input('Digite o número novamente: ')
+                #  If user input a number then
+                if numrep.isdecimal():
+                    #  Transform the string into a float, then the program can do calculations
+                    numrep = float(numrep)
                 print('[ sen  ] Seno')
                 print('[ cos  ] Cosseno')
                 print('[ tg   ] Tangente')
@@ -112,6 +137,7 @@ def matt():
                         matt()
                     elif restart == 'n':
                         input('ENTER PARA FINALIZAR')
+                        # Exit program instantly
                         sys.exit()
             if repet == 1:
                 print('[ sen  ] Seno')
@@ -158,14 +184,17 @@ def matt():
                     while restart != 's' and restart != 'n':
                         restart = input('Deseja reiniciar o programa? [S/N]: ').lower().strip()
                     if restart == 's':
+                        #  Return the function matt(), then the program restart
                         matt()
                     elif restart == 'n':
+                        #  Exit program instantly
                         sys.exit()
     print(f'O resultado é {add:.2f}')
     start = ' '
     while start != 's' and start != 'n':
         start = input('Deseja reiniciar o Programa? [S/N]').lower().strip()
     if start == 's':
+        #  Return the function matt(), then the program restart
         matt()
     else:
         input('ENTER para finalizar: ')
