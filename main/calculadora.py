@@ -1,7 +1,5 @@
 from math import *
 import sys
-
-
 print('=' * 60)
 print(f'{"CAlCULADORA":^60}')
 print('=' * 60)
@@ -10,18 +8,36 @@ print('')
 
 
 def matt():
+    #  Checar se os valores digitados serão números
+    contains_digit = False
     op = ' '
     while op != 'b' and op != 'a':
         op = str(input('Escolha entre operações Básica e Avançadas. [B/A] ')).lower().strip()
     num1 = input('Número: ')
-    #  Se o usuário não digitar um número
-    while not num1.isdecimal():
-        num1 = input('Digite o número novamente: ')
-    #  Se o usuário digitar um número
-    if num1.isdecimal():
-        #  Transforma a string num1 em um número float
-        num1 = float(num1)
+    while True:
+        #  Varrendo os valores de num1
+        for character in num1:
+            #  Assim que character for um digito, contains_digit passa a ser verdadeiro
+            if character.isdigit():
+                contains_digit = True
+        #  Se existir digitos em num1
+        if contains_digit is True:
+            #  Checando se o valor digitado é um possível float
+            if '.' in num1 and num1.count('.') == 1 and '.' != num1[0]:
+                num1 = float(num1)
+                break
+            elif "-+!@#$%¨&*()/?^][´.,'•◘○♦♣♠☺☻♥☺☻♥" in num1:
+                num1 = input('Digite somente números: ')
+            else:
+                if num1.isdecimal():
+                    num1 = float(num1)
+                    break
+            num1 = input('OPÇÃO INVÁLIDA. Digite novamente: ')
+        else:
+            num1 = input('OPÇÃO INVÁLIDA. Número: ')
     add = num1
+    #  Reseta contains_digit para falso, para poder checar os outros número digitado
+    contains_digit = False
     if op == 'b':
         while True:
             print('[ +  ] Somar ')
@@ -51,13 +67,28 @@ def matt():
             if esc == 'parar' or esc == 'stop':
                 break
             num2 = input('Número: ')
-            #  If user don't input number
-            while not num2.isdecimal():
-                num2 = input('Digite o número novamente: ')
-            #  If user's input is a number then
-            if num2.isdecimal():
-                #  transform the string into a float number
-                num2 = float(num2)
+            while True:
+                #  Varrando os valores de num2
+                for character in num2:
+                    #  Se caracter for um digito. Contains_digit passa a ser verdadeiro
+                    if character.isdigit():
+                        contains_digit = True
+                #  Se tiver digito no num2
+                if contains_digit is True:
+                    #  Para checar se o valor float é verdadeiro
+                    if '.' in num2 and num2.count('.') == 1 and '.' != num2[0]:
+                        num2 = float(num2)
+                        break
+                    elif "-+!@#$%¨&*()/?^][´.,'•◘○♦♣♠☺☻♥☺☻♥" in num2:
+                        num2 = input('Digite somente números: ')
+                    else:
+                        if num2.isdecimal():
+                            num2 = float(num2)
+                            break
+                    num2 = input('OPÇAÕ INVÁLIDA. Digite o número novamente: ')
+                else:
+                    num2 = input('Número: ')
+            contains_digit = False
             if esc == 'soma' or esc == '+':
                 add += num2
             elif esc == '-':
@@ -85,13 +116,27 @@ def matt():
             repet += 1
             if repet > 1:
                 numrep = input('Digite um número: ')
-                #  If user don't input a number
-                while not numrep.isdecimal():
-                    numrep = input('Digite o número novamente: ')
-                #  If user input a number then
-                if numrep.isdecimal():
-                    #  Transform the string into a float, then the program can do calculations
-                    numrep = float(numrep)
+                while True:
+                    #  Varrendo os valores de num1
+                    for character in numrep:
+                        #  Assim que character for um digito, contains_digit passa a ser verdadeiro
+                        if character.isdigit():
+                            contains_digit = True
+                    #  Se existir digitos em num1
+                    if contains_digit is True:
+                        #  Checando se o valor digitado é um possível float
+                        if '.' in numrep and numrep.count('.') == 1 and '.' != numrep[0]:
+                            numrep = float(numrep)
+                            break
+                        elif "-+!@#$%¨&*()/?^][´.,'•◘○♦♣♠☺☻♥☺☻♥" in numrep:
+                            numrep = input('Digite somente números: ')
+                        else:
+                            if numrep.isdecimal():
+                                numrep = float(numrep)
+                                break
+                        numrep = input('OPÇÃO INVÁLIDA. Digite novamente: ')
+                    else:
+                        numrep = input('OPÇÃO INVÁLIDA. Número: ')
                 print('[ sen  ] Seno')
                 print('[ cos  ] Cosseno')
                 print('[ tg   ] Tangente')
